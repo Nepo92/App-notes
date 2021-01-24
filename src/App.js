@@ -1,12 +1,13 @@
 import './App.css';
 import classes from './App.module.scss';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import Auth from './components/Auth/Auth.jsx';
 import Notes from './components/Notes/Notes.jsx';
 import Newer from './components/Newer/Newer.jsx';
 import { compose } from 'redux';
 import withAuthRedirect from './hoc/checkAuth';
+
 
 function App(props) {
   const styles = {
@@ -15,9 +16,16 @@ function App(props) {
     button: 'App_button__gvtSE',
     navigation: 'App_navigation__3Bo0R',
   }
-  console.log(props);
+
+  const goToApp = (props) => {
+    props.history.push('/login');
+  }
+
   return (
     <div className={classes.app}>
+
+      <button className={classes.buttonApp} onClick={() => { goToApp(props) }}>Go to app!</button>
+
       {props.isAuth ? (
         <Route exact path={"/notes"} render={() => <Notes styles={styles} userId={props.userId} />} />
       ) : (
@@ -38,7 +46,6 @@ const mapStateToProps = (state) => {
 }
 
 export default compose(
-  // withAuthRedirect,
-  connect(mapStateToProps, null)
-
-  )(App);
+  withRouter,
+  connect(mapStateToProps, null),
+)(App);
