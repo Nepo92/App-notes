@@ -5,6 +5,7 @@ import classes from "./Notes.module.scss";
 import { delNotes } from "../../redux/notesReducer";
 import { notesSelect } from "../../redux/Selectors/notesSelectors";
 import { compose } from 'redux';
+import withAuthRedirect from "../../hoc/checkAuth";
 
 const Notes = (props) => {
   /* Функция для склонения единиц измерения времени */
@@ -170,6 +171,8 @@ const Notes = (props) => {
     props.history.push('/login');
   }
 
+  console.log(props.styles);
+
   return (
     <div className={classes.notes + " " + props.styles.block}>
       <h2 className={classes.notes__title}>Заметки {props.login}:</h2>
@@ -209,6 +212,7 @@ const mapStateToProps = (state) => {
 
 export default compose(
   withRouter,
+  withAuthRedirect,
   connect(mapStateToProps,
   /* Пробрасываем в пропсы actions из reducer */
   {

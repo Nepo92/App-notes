@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { setlogin } from "../../redux/authReducer";
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
+import withAuthRedirect from '../../hoc/checkAuth';
 
 const Login = (props) => {
   /* Форма */
@@ -41,6 +42,8 @@ const Auth = (props) => {
     props.setlogin(value.login, value.password);
     props.history.push('/notes');
   };
+
+  console.log(props);
 
   return (
     <div className={classes.auth}>
