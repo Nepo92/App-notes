@@ -1,0 +1,36 @@
+.new {
+  &__form {
+    p {
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+
+    textarea {
+      width: 100%;
+      height: 40px;
+      resize: none;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+}
+
+@media (min-width: 375px) {
+  .new {
+    &__form {
+      font-size: 18px;
+
+      textarea {
+        width: 250px;
+      }
+    }
+  }
+}
