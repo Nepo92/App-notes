@@ -1,7 +1,7 @@
 import './App.css';
 import classes from './App.module.scss';
 import { connect } from 'react-redux';
-import { Route, withRouter } from 'react-router-dom';
+import { Redirect, Route, withRouter } from 'react-router-dom';
 import Auth from './components/Auth/Auth.jsx';
 import Notes from './components/Notes/Notes.jsx';
 import Newer from './components/Newer/Newer.jsx';
@@ -23,7 +23,7 @@ function App(props) {
       <Route exact path={"/notes"} render={() => <Notes styles={styles} userId={props.userId} />} />
       <Route path={"/new"} render={() => <Newer styles={styles} userId={props.userId} />} />
 
-      <StartRoutingComponent />
+      <Route path={"/"} render={() => <Redirect to={'/login'} />} />
     </div>
   );
 }
@@ -35,9 +35,6 @@ const mapStateToProps = (state) => {
     userId: state.auth.userId,
   }
 }
-
-
-const StartRoutingComponent = compose(withAuthRedirect)(() => <div></div>);
 
 export default compose(
   withRouter,
